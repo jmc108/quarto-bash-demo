@@ -15,4 +15,3 @@ uname -a
 pwd
 ls -la
 echo "Hello from Bash on Binder!"
-```
