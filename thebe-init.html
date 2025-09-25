@@ -1,23 +1,26 @@
 <script>
 window.addEventListener('load', () => {
-  // Mark every Quarto code block that looks like bash as executable for Thebe
-  document.querySelectorAll('pre, pre > code').forEach((node) => {
-    const pre = node.tagName === 'PRE' ? node : node.closest('pre');
-    const code = node.tagName === 'CODE' ? node : pre?.querySelector('code');
+  // Find Quarto/Pandoc code blocks that are Bash
+  document.querySelectorAll('div.sourceCode').forEach((block) => {
+    const code = block.querySelector('code.language-bash, code.bash, code.sourceCode.bash');
+    const pre  = block.querySelector('pre');
+    if (!code || !pre) return;
 
-    if (!pre || !code) return;
-    const classes = new Set([...pre.classList, ...code.classList]);
+    // Mark the <pre> as an executable Thebe cell
+    pre.setAttribute('data-executable', 'true');
+    pre.setAttribute('data-language', 'bash');
 
-    if (classes.has('bash') || classes.has('language-bash') || classes.has('sourceCode')) {
-      pre.setAttribute('data-executable', 'true');
-      // Hint to CodeMirror for syntax
-      pre.setAttribute('data-language', 'bash');
+    // Ensure there is an output area immediately after the code block
+    const next = block.nextElementSibling;
+    const needsOutput = !(next && next.classList && next.classList.contains('output'));
+    if (needsOutput) {
+      const out = document.createElement('div');
+      out.className = 'output';
+      block.insertAdjacentElement('afterend', out);
     }
-  });
 
-  // Start Thebe (will connect to Binder and activate cells)
-  if (window.thebelab && typeof thebelab.bootstrap === 'function') {
-    thebelab.bootstrap();
-  }
+    // (Optional) tag for clarity
+    block.classList.add('thebelab-cell');
+  });
 });
 </script>
