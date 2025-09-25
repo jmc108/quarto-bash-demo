@@ -4,12 +4,24 @@ project:
 
 website:
   title: "Bash Live Demo"
+  repo-url: https://github.com/jmc108/quarto-bash-demo        # helps Quarto infer repo
+  repo-actions: [source]
+
+# Use Jupyter kernels (not knitr) so Thebe knows what kernel to request
+engine: jupyter
+jupyter: bash                                                 # default kernel for pages
 
 format:
   html:
-    thebe: true        # turn on Thebe live code cells
-    code-tools: true   # show copy / run controls
+    code-tools: true
+    thebe:
+      use-binder: true
+      # Explicit Binder target so Thebe doesn't have to guess
+      binder:
+        url: https://mybinder.org
+        repo: jmc108/quarto-bash-demo
+        branch: main
 
-# (Optional) don’t execute during build; we’ll run in Binder instead
+# We don't want build-time execution; readers will run it via Thebe/Binder
 execute:
   eval: false

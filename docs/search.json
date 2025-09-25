@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "Interactive Bash via Binder + Thebe",
     "section": "",
-    "text": "Click Live Code → then the Run ▶️ button in the cell.\nThis starts a Binder session that runs a Bash Jupyter kernel.\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\ntouch .nojekyll"
+    "text": "Click Live Code → then the Run ▶️ button in the cell.\nThis starts a Binder session that runs a Bash Jupyter kernel.\n\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\""
   }
 ]
