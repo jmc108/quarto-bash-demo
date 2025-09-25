@@ -21,7 +21,7 @@ format:
         url: https://mybinder.org
         repo: jmc108/quarto-bash-demo
         branch: main
-      kernelname: bash
+      kernelName: bash
 # We don't want build-time execution; readers will run it via Thebe/Binder
 execute:
   eval: false
