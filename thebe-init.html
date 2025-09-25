@@ -1,0 +1,23 @@
+<script>
+window.addEventListener('load', () => {
+  // Mark every Quarto code block that looks like bash as executable for Thebe
+  document.querySelectorAll('pre, pre > code').forEach((node) => {
+    const pre = node.tagName === 'PRE' ? node : node.closest('pre');
+    const code = node.tagName === 'CODE' ? node : pre?.querySelector('code');
+
+    if (!pre || !code) return;
+    const classes = new Set([...pre.classList, ...code.classList]);
+
+    if (classes.has('bash') || classes.has('language-bash') || classes.has('sourceCode')) {
+      pre.setAttribute('data-executable', 'true');
+      // Hint to CodeMirror for syntax
+      pre.setAttribute('data-language', 'bash');
+    }
+  });
+
+  // Start Thebe (will connect to Binder and activate cells)
+  if (window.thebelab && typeof thebelab.bootstrap === 'function') {
+    thebelab.bootstrap();
+  }
+});
+</script>

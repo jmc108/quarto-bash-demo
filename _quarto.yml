@@ -10,13 +10,8 @@ engine: jupyter
 format:
   html:
     code-tools: true
-    thebe:
-      use-binder: true
-      binder:
-        url: https://mybinder.org
-        repo: jmc108/quarto-bash-demo
-        branch: main
-      kernelName: bash
+    include-in-header: thebe-setup.html
+    include-after-body: thebe-init.html
 
 execute:
   eval: false

@@ -1,8 +1,8 @@
 {
-  "hash": "f696ac3585c760253068166827431f5b",
+  "hash": "4aaca60d61b5b30012e6d8dc6a4a112a",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Interactive Bash via Binder + Thebe\"\ndescription: \"Quarto page with a live Bash shell v4\"\nformat:\n  html:\n    thebe: true\n---\n\n\nClick **Live Code** → then the **Run** ▶️ button in the cell.  \nThis starts a Binder session that runs a **Bash Jupyter kernel**.\n\n::: {#ec378386 .cell execution_count=1}\n``` {.bash .cell-code}\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\n```\n:::\n\n\n",
+    "markdown": "---\ntitle: \"Interactive Bash via Binder + Thebe\"\ndescription: \"Quarto page with a live Bash shell v4\"\nformat:\n  html:\n    thebe: true\n---\n\n\nClick **Live Code** → then the **Run** ▶️ button in the cell.  \nThis starts a Binder session that runs a **Bash Jupyter kernel**.\n\n::: {#876272df .cell execution_count=1}\n``` {.bash .cell-code}\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\n```\n:::\n\n\n",
     "supporting": [
       "index_files"
     ],
