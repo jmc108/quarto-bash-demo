@@ -1,0 +1,16 @@
+---
+title: "Interactive Bash via Binder + Thebe"
+description: "Quarto page with a live Bash shell"
+---
+
+Click **Live Code** → then the **Run** ▶️ button in the cell.  
+This starts a Binder session that runs a **Bash Jupyter kernel**.
+
+```{bash}
+# Try a few shell commands:
+uname -a
+pwd
+ls -la
+echo "Hello from Bash on Binder!"
+touch .nojekyll
+```

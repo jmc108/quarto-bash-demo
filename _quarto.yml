@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Bash Live Demo"
+
+format:
+  html:
+    thebe: true        # turn on Thebe live code cells
+    code-tools: true   # show copy / run controls
+
+# (Optional) don’t execute during build; we’ll run in Binder instead
+execute:
+  eval: false

@@ -1,0 +1,12 @@
+{
+  "hash": "b0c2a32f24718783e85ee6c5be2cd9c2",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "---\ntitle: \"Interactive Bash via Binder + Thebe\"\ndescription: \"Quarto page with a live Bash shell\"\n---\n\n\nClick **Live Code** → then the **Run** ▶️ button in the cell.  \nThis starts a Binder session that runs a **Bash Jupyter kernel**.\n\n\n```{bash}\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\ntouch .nojekyll\n```\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

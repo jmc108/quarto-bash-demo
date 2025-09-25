@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euxo pipefail
+
+# Make the bash kernel available to Jupyter:
+python -m bash_kernel.install
