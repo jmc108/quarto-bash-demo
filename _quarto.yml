@@ -4,8 +4,6 @@ project:
 
 website:
   title: "Bash Live Demo"
-  repo-url: https://github.com/jmc108/quarto-bash-demo
-  repo-actions: [source]
 
 engine: jupyter
 
