@@ -1,6 +1,6 @@
 ---
 title: "Interactive Bash via Binder + Thebe"
-description: "Quarto page with a live Bash shell"
+description: "Quarto page with a live Bash shell v2"
 ---
 
 Click **Live Code** → then the **Run** ▶️ button in the cell.  
