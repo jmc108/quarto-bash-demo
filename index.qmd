@@ -1,7 +1,11 @@
 ---
 title: "Interactive Bash via Binder + Thebe"
-description: "Quarto page with a live Bash shell v2"
+description: "Quarto page with a live Bash shell v3"
+format:
+  html:
+    thebe: true
 ---
+
 
 Click **Live Code** → then the **Run** ▶️ button in the cell.  
 This starts a Binder session that runs a **Bash Jupyter kernel**.
