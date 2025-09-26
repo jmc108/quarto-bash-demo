@@ -100,18 +100,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<!-- Configure + load Thebe (fixed version) -->
 <script type="text/x-thebe-config">
 {
   "bootstrap": true,
   "requestKernel": true,
-  "mountActivateWidget": true,
-  "mountStatusWidget": true,
   "selector": "pre[data-executable]",
-  "binderOptions": { "repo": "jmc108/quarto-bash-demo", "ref": "main", "binderUrl": "https://mybinder.org" },
+  "binderOptions": {
+    "repo": "jmc108/quarto-bash-demo",
+    "ref": "main",
+    "binderUrl": "https://mybinder.org"
+  },
   "kernelOptions": { "kernelName": "bash" }
 }
 </script>
-<script src="https://unpkg.com/thebe@latest/lib/index.js"></script>
+<script src="https://unpkg.com/thebe@0.8.2/lib/index.js"></script>
 
 
 </head>
@@ -159,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Click <strong>Live Code</strong> → then the <strong>Run</strong> ▶️ button in the cell.<br>
 This starts a Binder session that runs a <strong>Bash Jupyter kernel</strong>.</p>
-<div id="93aab1c1" class="cell" data-execution_count="1">
+<div id="155339e4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Try a few shell commands:</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">uname</span> <span class="at">-a</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
@@ -173,8 +176,8 @@ This starts a Binder session that runs a <strong>Bash Jupyter kernel</strong>.</
 
 </main> <!-- /main -->
 <script>
-// Tag Quarto code blocks as executable for Thebe
-function tagBashBlocks() {
+window.addEventListener('load', () => {
+  // Tag Quarto/Pandoc code blocks that are Bash
   document.querySelectorAll('div.sourceCode').forEach((block) => {
     const code = block.querySelector('code.language-bash, code.bash, code.sourceCode.bash');
     const pre  = block.querySelector('pre');
@@ -183,47 +186,15 @@ function tagBashBlocks() {
     pre.setAttribute('data-executable', 'true');
     pre.setAttribute('data-language', 'bash');
 
-    // ensure an output area exists after the code block
+    // Ensure an output area immediately after the code block
     const next = block.nextElementSibling;
-    if (!(next && next.classList && next.classList.contains('output'))) {
+    const needsOutput = !(next && next.classList && next.classList.contains('output'));
+    if (needsOutput) {
       const out = document.createElement('div');
       out.className = 'output';
       block.insertAdjacentElement('afterend', out);
     }
   });
-}
-
-// Bind Enter → run, Shift+Enter → newline on Thebe editors
-function bindEnterToRun() {
-  document.querySelectorAll('.thebelab-input .CodeMirror').forEach((el) => {
-    const cm = el.CodeMirror;
-    if (!cm || cm.__enterBound) return;
-    cm.__enterBound = true;
-
-    cm.addKeyMap({
-      "Enter": function() {
-        const cell = el.closest('.thebelab-cell, .cell');
-        const runBtn = cell && cell.querySelector('[title="Run"], .thebe-run-button, .thebelab-run-button');
-        if (runBtn) runBtn.click();
-      },
-      "Shift-Enter": function(cm) {
-        cm.replaceSelection('\n');
-      }
-    });
-  });
-}
-
-window.addEventListener('load', () => {
-  tagBashBlocks();
-
-  // If your config uses `"bootstrap": true`, Thebe will start itself.
-  // Re-run bindings after cells appear.
-  bindEnterToRun();
-  setTimeout(bindEnterToRun, 800);
-
-  // Re-bind whenever Thebe updates DOM
-  const mo = new MutationObserver(() => bindEnterToRun());
-  mo.observe(document.body, { childList: true, subtree: true });
 });
 </script>
 <script id="quarto-html-after-body" type="application/javascript">

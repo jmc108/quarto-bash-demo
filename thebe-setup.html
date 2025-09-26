@@ -1,12 +1,15 @@
+<!-- Configure + load Thebe (fixed version) -->
 <script type="text/x-thebe-config">
 {
   "bootstrap": true,
   "requestKernel": true,
-  "mountActivateWidget": true,
-  "mountStatusWidget": true,
   "selector": "pre[data-executable]",
-  "binderOptions": { "repo": "jmc108/quarto-bash-demo", "ref": "main", "binderUrl": "https://mybinder.org" },
+  "binderOptions": {
+    "repo": "jmc108/quarto-bash-demo",
+    "ref": "main",
+    "binderUrl": "https://mybinder.org"
+  },
   "kernelOptions": { "kernelName": "bash" }
 }
 </script>
-<script src="https://unpkg.com/thebe@latest/lib/index.js"></script>
+<script src="https://unpkg.com/thebe@0.8.2/lib/index.js"></script>

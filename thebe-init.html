@@ -1,6 +1,6 @@
 <script>
-// Tag Quarto code blocks as executable for Thebe
-function tagBashBlocks() {
+window.addEventListener('load', () => {
+  // Tag Quarto/Pandoc code blocks that are Bash
   document.querySelectorAll('div.sourceCode').forEach((block) => {
     const code = block.querySelector('code.language-bash, code.bash, code.sourceCode.bash');
     const pre  = block.querySelector('pre');
@@ -9,17 +9,21 @@ function tagBashBlocks() {
     pre.setAttribute('data-executable', 'true');
     pre.setAttribute('data-language', 'bash');
 
-    // ensure an output area exists after the code block
+    // Ensure an output area immediately after the code block
     const next = block.nextElementSibling;
-    if (!(next && next.classList && next.classList.contains('output'))) {
+    const needsOutput = !(next && next.classList && next.classList.contains('output'));
+    if (needsOutput) {
       const out = document.createElement('div');
       out.className = 'output';
       block.insertAdjacentElement('afterend', out);
     }
   });
-}
+});
+</script>
 
-// Bind Enter → run, Shift+Enter → newline on Thebe editors
+
+<script>
+// Bind Enter→run, Shift+Enter→newline once Thebe is ready
 function bindEnterToRun() {
   document.querySelectorAll('.thebelab-input .CodeMirror').forEach((el) => {
     const cm = el.CodeMirror;
@@ -32,23 +36,15 @@ function bindEnterToRun() {
         const runBtn = cell && cell.querySelector('[title="Run"], .thebe-run-button, .thebelab-run-button');
         if (runBtn) runBtn.click();
       },
-      "Shift-Enter": function(cm) {
-        cm.replaceSelection('\n');
-      }
+      "Shift-Enter": function(cm) { cm.replaceSelection('\n'); }
     });
   });
 }
 
-window.addEventListener('load', () => {
-  tagBashBlocks();
-
-  // If your config uses `"bootstrap": true`, Thebe will start itself.
-  // Re-run bindings after cells appear.
-  bindEnterToRun();
-  setTimeout(bindEnterToRun, 800);
-
-  // Re-bind whenever Thebe updates DOM
-  const mo = new MutationObserver(() => bindEnterToRun());
-  mo.observe(document.body, { childList: true, subtree: true });
+// Re-bind once the kernel is actually connected
+document.addEventListener('thebe-status', (e) => {
+  if (e && e.detail && e.detail.status === 'ready') {
+    setTimeout(bindEnterToRun, 200);  // give DOM a breath
+  }
 });
 </script>
