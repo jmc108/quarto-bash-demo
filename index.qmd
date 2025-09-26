@@ -1,6 +1,6 @@
 ---
 title: "Interactive Bash via Binder + Thebe"
-description: "Quarto page with a live Bash shell v8"
+description: "Quarto page with a live Bash shell v9"
 format:
   html:
     thebe: true

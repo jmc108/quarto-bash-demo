@@ -1,8 +1,8 @@
 {
-  "hash": "3df741e3225c4ea318af5a2a9cdc673a",
+  "hash": "13a07b7759e32c21720d5a72f27f9cf2",
   "result": {
     "engine": "jupyter",
-    "markdown": "---\ntitle: \"Interactive Bash via Binder + Thebe\"\ndescription: \"Quarto page with a live Bash shell v8\"\nformat:\n  html:\n    thebe: true\n---\n\n\n<div class=\"thebe-activate\"></div>\n<div class=\"thebe-status\"></div>\n\n\nClick **Live Code** → then the **Run** ▶️ button in the cell.  \nThis starts a Binder session that runs a **Bash Jupyter kernel**.\n\n::: {#155339e4 .cell execution_count=1}\n``` {.bash .cell-code}\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\n```\n:::\n\n\n",
+    "markdown": "---\ntitle: \"Interactive Bash via Binder + Thebe\"\ndescription: \"Quarto page with a live Bash shell v9\"\nformat:\n  html:\n    thebe: true\n---\n\n\n<div class=\"thebe-activate\"></div>\n<div class=\"thebe-status\"></div>\n\n\nClick **Live Code** → then the **Run** ▶️ button in the cell.  \nThis starts a Binder session that runs a **Bash Jupyter kernel**.\n\n::: {#5da7ef21 .cell execution_count=1}\n``` {.bash .cell-code}\n# Try a few shell commands:\nuname -a\npwd\nls -la\necho \"Hello from Bash on Binder!\"\n```\n:::\n\n\n",
     "supporting": [
       "index_files"
     ],
