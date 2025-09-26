@@ -1,26 +1,54 @@
 <script>
-window.addEventListener('load', () => {
-  // Find Quarto/Pandoc code blocks that are Bash
+// Tag Quarto code blocks as executable for Thebe
+function tagBashBlocks() {
   document.querySelectorAll('div.sourceCode').forEach((block) => {
     const code = block.querySelector('code.language-bash, code.bash, code.sourceCode.bash');
     const pre  = block.querySelector('pre');
     if (!code || !pre) return;
 
-    // Mark the <pre> as an executable Thebe cell
     pre.setAttribute('data-executable', 'true');
     pre.setAttribute('data-language', 'bash');
 
-    // Ensure there is an output area immediately after the code block
+    // ensure an output area exists after the code block
     const next = block.nextElementSibling;
-    const needsOutput = !(next && next.classList && next.classList.contains('output'));
-    if (needsOutput) {
+    if (!(next && next.classList && next.classList.contains('output'))) {
       const out = document.createElement('div');
       out.className = 'output';
       block.insertAdjacentElement('afterend', out);
     }
-
-    // (Optional) tag for clarity
-    block.classList.add('thebelab-cell');
   });
+}
+
+// Bind Enter → run, Shift+Enter → newline on Thebe editors
+function bindEnterToRun() {
+  document.querySelectorAll('.thebelab-input .CodeMirror').forEach((el) => {
+    const cm = el.CodeMirror;
+    if (!cm || cm.__enterBound) return;
+    cm.__enterBound = true;
+
+    cm.addKeyMap({
+      "Enter": function() {
+        const cell = el.closest('.thebelab-cell, .cell');
+        const runBtn = cell && cell.querySelector('[title="Run"], .thebe-run-button, .thebelab-run-button');
+        if (runBtn) runBtn.click();
+      },
+      "Shift-Enter": function(cm) {
+        cm.replaceSelection('\n');
+      }
+    });
+  });
+}
+
+window.addEventListener('load', () => {
+  tagBashBlocks();
+
+  // If your config uses `"bootstrap": true`, Thebe will start itself.
+  // Re-run bindings after cells appear.
+  bindEnterToRun();
+  setTimeout(bindEnterToRun, 800);
+
+  // Re-bind whenever Thebe updates DOM
+  const mo = new MutationObserver(() => bindEnterToRun());
+  mo.observe(document.body, { childList: true, subtree: true });
 });
 </script>
